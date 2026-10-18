@@ -6,3 +6,5 @@ const files = fs.readdirSync(dir).filter((f) => f.endsWith('.test.js')).map((f) 
 if (!files.length) { console.error('No test files in', dir); process.exit(1); }
 const r = spawnSync(process.execPath, ['--test', ...(kind === 'integration' ? ['--test-concurrency=1'] : []), ...files], { stdio: 'inherit' });
 process.exit(r.status === null ? 1 : r.status);
+
+
