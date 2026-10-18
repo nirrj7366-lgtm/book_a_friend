@@ -1,0 +1,47 @@
+node_modules
+.env
+client/dist
+*.log
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Build output
+client/dist/
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Runtime / temporary files
+*.pid
+*.seed
+*.pid.lock
+.tmp/
+tmp/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Test / tool caches
+.nyc_output/
+.eslintcache
+.vite/
+
+# Local uploads and generated files
+uploads/
