@@ -45,10 +45,10 @@ export function Kyc({ me, onDone }) {
       <label className="lbl">Emergency contact name</label><input className="in" value={f.ecName} onChange={set('ecName')} />
       <label className="lbl">Emergency contact mobile</label><div className="pre"><div className="code">+91</div><input className="in" type="tel" inputMode="numeric" maxLength={10} value={f.ecPhone} onChange={set('ecPhone')} /></div>
       <div style={{ marginTop: 14 }}>
-        <Chk v={f.r2} on={(v) => setF({ ...f, r2: v })}>I understand Yaari is <b>strictly platonic</b>. I will not offer, ask for or accept sexual services or physical intimacy.</Chk>
+        <Chk v={f.r2} on={(v) => setF({ ...f, r2: v })}>I understand BookAFriend is <b>strictly platonic</b>. I will not offer, ask for or accept sexual services or physical intimacy.</Chk>
         <Chk v={f.r3} on={(v) => setF({ ...f, r3: v })}>I will meet only at <b>public or registered venues</b>. Home visits are only for verified caretakers.</Chk>
         <Chk v={f.r4} on={(v) => setF({ ...f, r4: v })}>I will not pressure anyone to drink alcohol or use drugs, and I will follow the law.</Chk>
-        <Chk v={f.r5} on={(v) => setF({ ...f, r5: v })}>I will pay and get paid <b>only through Yaari</b>.</Chk>
+        <Chk v={f.r5} on={(v) => setF({ ...f, r5: v })}>I will pay and get paid <b>only through BookAFriend</b>.</Chk>
         <Chk v={f.r6} on={(v) => setF({ ...f, r6: v })}>I agree to the Terms, the Privacy Policy and to ID and background verification.</Chk>
       </div>
       <div className="actions"><Err m={err} /><button className="btn gold full" disabled={busy} onClick={submit}>Submit for review</button></div>
@@ -58,10 +58,10 @@ export function Kyc({ me, onDone }) {
 
 export const Wait = ({ me, onCheck }) => {
   const [busy, run] = useAct();
-  return <div className="narrow form"><h2>Under review</h2><p className="sub">Thanks, {String(me.name || '').split(' ')[0]}. Our team is checking your details. This usually takes a short while. You will be able to use Yaari as soon as you are approved.</p><button className="btn full" disabled={busy} onClick={() => run(async () => { await onCheck(); toast('Checked.'); })}>Check status</button></div>;
+  return <div className="narrow form"><h2>Under review</h2><p className="sub">Thanks, {String(me.name || '').split(' ')[0]}. Our team is checking your details. This usually takes a short while. You will be able to use BookAFriend as soon as you are approved.</p><button className="btn full" disabled={busy} onClick={() => run(async () => { await onCheck(); toast('Checked.'); })}>Check status</button></div>;
 };
 
-export const Blocked = () => <div className="narrow form"><h2>Account on hold</h2><p className="sub">Your account is currently suspended or closed. Please contact Yaari support.</p></div>;
+export const Blocked = () => <div className="narrow form"><h2>Account on hold</h2><p className="sub">Your account is currently suspended or closed. Please contact BookAFriend support.</p></div>;
 
 export const Role = ({ me, keepPct, pick }) => (
   <div className="narrow form"><h2>Hi {String(me.name || '').split(' ')[0]}, what would you like to do?</h2><p className="sub">You can switch any time from the top bar.</p>
@@ -108,13 +108,13 @@ export function Setup({ me, comp, commissionPct, onDone, reloadMe }) {
       <input className="in" type="file" accept="image/jpeg,image/png,image/webp" style={{ marginTop: 8 }} onChange={(e) => setPhoto(e.target.files[0] || null)} /><p className="hint">A clear, friendly photo of your face. Only verified members can see it.</p>
       <span className="lbl">Services you offer</span>
       <div className="chips">{SERVICES.map((s) => <button key={s.k} className="chip" aria-pressed={f.services.includes(s.k)} onClick={() => toggle('services', s.k)}>{s.e} {s.k}</button>)}</div>
-      <label className="lbl">Your rate per hour (₹)</label><input className="in" type="number" min="100" max="5000" inputMode="numeric" value={f.rate} onChange={(e) => setF({ ...f, rate: e.target.value })} /><p className="hint">Between ₹100 and ₹5,000. Yaari keeps {commissionPct}% commission.</p>
+      <label className="lbl">Your rate per hour (₹)</label><input className="in" type="number" min="100" max="5000" inputMode="numeric" value={f.rate} onChange={(e) => setF({ ...f, rate: e.target.value })} /><p className="hint">Between ₹100 and ₹5,000. BookAFriend keeps {commissionPct}% commission.</p>
       <label className="lbl">Short bio</label><textarea className="in" rows={4} maxLength={280} placeholder="Tell renters about yourself in a few friendly lines." value={f.bio} onChange={(e) => setF({ ...f, bio: e.target.value })} />
       <span className="lbl">Available on</span>
       <div className="chips">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => <button key={d} className="chip" aria-pressed={f.days.includes(d)} onClick={() => toggle('days', d)}>{d}</button>)}</div>
       <p className="hint">Renters can only book you on these days.</p>
       {care ? <><div className="note"><b>Caretaker listings need extra checks.</b> Upload your police verification certificate. Your Caretaker service stays hidden until our team approves it.</div><label className="lbl">Police verification certificate</label><input className="in" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" onChange={(e) => setPolice(e.target.files[0] || null)} /></> : null}
-      <Chk v={f.c1} on={(v) => setF({ ...f, c1: v })}>I will follow Yaari&apos;s safety rules and meet only at allowed venues.</Chk>
+      <Chk v={f.c1} on={(v) => setF({ ...f, c1: v })}>I will follow BookAFriend&apos;s safety rules and meet only at allowed venues.</Chk>
       <div className="actions"><Err m={err} /><button className="btn gold full" disabled={busy} onClick={submit}>{comp ? 'Save' : 'Go live'}</button></div>
     </div>
   );

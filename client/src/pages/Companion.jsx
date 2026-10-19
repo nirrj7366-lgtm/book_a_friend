@@ -32,7 +32,7 @@ function Requests({ me, settings, onLoaded }) {
               <div className="line" style={{ border: 0, padding: 0 }}><b>{r.service} with {r.renterName}</b><span className={pillFor(r.status)}>{STLBL[r.status]}</span></div>
               <div className="meta">{fmtWhen(r.startsAt)} · {r.hours} hr · {r.venueType} ({r.venueName})</div>
               <div className="meta">You earn <b>{rs(r.net)}</b> after {settings.commissionPct}% commission</div>
-              {r.disputed ? <div className="note">The renter reported a problem. Yaari support is reviewing it.</div> : null}
+              {r.disputed ? <div className="note">The renter reported a problem. BookAFriend support is reviewing it.</div> : null}
               {r.status === 'accepted' ? <div className="note">Ask {r.renterName} for their 4-digit check-in code when you meet.</div> : null}
             </div>
           </div>
@@ -84,7 +84,7 @@ function Earnings({ settings }) {
       <Sheet open={sheet} title="Withdraw earnings" onClose={() => setSheet(false)} footer={<button className="btn full" disabled={busy} onClick={go}>Request withdrawal</button>}>
         <div className="sum" style={{ marginTop: 4 }}><div className="r t"><span>Amount</span><span>{rs(w.balance)}</span></div></div>
         <label className="lbl">UPI ID</label><input className="in" placeholder="name@bank" autoComplete="off" value={upi} onChange={(e) => setUpi(e.target.value)} />
-        <p className="hint">Yaari sends the money to this UPI ID after a quick check, usually within 1 to 2 working days.</p><p className="err">{err}</p>
+        <p className="hint">BookAFriend sends the money to this UPI ID after a quick check, usually within 1 to 2 working days.</p><p className="err">{err}</p>
       </Sheet>
     </>
   );
