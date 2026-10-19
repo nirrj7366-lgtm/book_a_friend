@@ -28,7 +28,7 @@ export function useSafety() {
     if (watch === bookingId) { stop(); toast('Stopped sharing.'); return; }
     stop(); setWatch(bookingId);
     timer.current = setInterval(() => ping(bookingId), 60000);
-    toast('Sharing your location with Yaari support every minute. Keep this page open.');
+    toast('Sharing your location with BookAFriend support every minute. Keep this page open.');
     await ping(bookingId);
   };
   return { sos, closeSos: () => setSos(null), sendSos, watch, toggleShare, stop };

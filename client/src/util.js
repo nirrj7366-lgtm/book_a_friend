@@ -14,7 +14,7 @@ export const SERVICES = [
 export const svc = (k) => SERVICES.find((s) => s.k === k);
 export const STATES = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'];
 export const AGES = [['', 'Any age'], ['18-25', '18 to 25'], ['26-35', '26 to 35'], ['36-45', '36 to 45'], ['46-', '46 and above']];
-export const REASONS = ['Inappropriate behaviour', 'Asked to meet privately', 'Asked for payment outside Yaari', 'Fake profile or photo', 'Harassment or threats', 'Other'];
+export const REASONS = ['Inappropriate behaviour', 'Asked to meet privately', 'Asked for payment outside BookAFriend', 'Fake profile or photo', 'Harassment or threats', 'Other'];
 export const STLBL = { pending_payment: 'Awaiting payment', paid: 'Waiting for companion', accepted: 'Confirmed', in_progress: 'In progress', completed: 'Completed', refund_pending: 'Refund in progress', refunded: 'Refunded', cancelled: 'Cancelled' };
 export const pillFor = (st) => (st === 'completed' ? 'pill g' : st === 'refunded' || st === 'cancelled' ? 'pill r' : st === 'refund_pending' ? 'pill o' : 'pill');
 const AVC = ['#CFE3FF', '#FFD9E6', '#D8F2DD', '#FFE9B8', '#E7DAFB', '#CDEFF0'];

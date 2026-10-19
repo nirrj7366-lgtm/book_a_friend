@@ -7,7 +7,7 @@ import { fmtWhen, rs, REASONS } from './util';
 export function openCheckout(d, me, desc, onPaid) {
   if (!window.Razorpay) throw new Error('Razorpay could not load. Check your internet or turn off the ad-blocker, then try again.');
   const rz = new window.Razorpay({
-    key: d.keyId, amount: d.amount, currency: 'INR', order_id: d.orderId, name: 'Yaari', description: desc,
+    key: d.keyId, amount: d.amount, currency: 'INR', order_id: d.orderId, name: 'BookAFriend', description: desc,
     prefill: { name: me.name, email: me.email, contact: me.mobile },
     theme: { color: '#0E1B33' },
     handler: async (resp) => {
@@ -83,7 +83,7 @@ export function SosSheet({ sos, me, onClose }) {
   const msg = 'I pressed the SOS button on Yaari and may need help.' + loc;
   return (
     <Sheet open={!!sos} title="SOS sent" onClose={onClose}>
-      <div className="note"><b>Yaari support has been alerted</b>{sos && sos.lat != null ? ' with your location.' : '. We could not read your location.'}</div>
+      <div className="note"><b>BookAFriend support has been alerted</b>{sos && sos.lat != null ? ' with your location.' : '. We could not read your location.'}</div>
       <p>Also tell <b>{(me && me.emergencyName) || 'your emergency contact'}</b> right now:</p>
       <a className="btn full" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', background: 'var(--teal)', color: '#fff' }} target="_blank" rel="noopener noreferrer"
         href={`https://wa.me/91${me ? me.emergencyMobile : ''}?text=${encodeURIComponent(msg)}`}>Send WhatsApp alert</a>
@@ -105,7 +105,7 @@ export function ReportSheet({ rep, onClose, onDone }) {
       if (rep.problem) {
         if (details.trim().length < 5) throw new Error('Please describe the problem.');
         await api(`/bookings/${rep.bookingId}/problem`, { method: 'POST', body: { note: details } });
-        toast('Reported. Yaari support will look into it. Payment will not be released automatically.');
+        toast('Reported. BookAFriend support will look into it. Payment will not be released automatically.');
       } else {
         if (!reason) throw new Error('Choose a reason.');
         await api('/safety/report', { method: 'POST', body: { reportedId: rep.reportedId, bookingId: rep.bookingId, reason, details } });

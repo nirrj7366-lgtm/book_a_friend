@@ -176,7 +176,7 @@ function Bookings({ me, feePct, payFor, clearPay }) {
               <div className="line" style={{ border: 0, padding: 0 }}><b>{b.service} with {b.companionName}</b><span className={pillFor(b.status)}>{STLBL[b.status]}</span></div>
               <div className="meta">{fmtWhen(b.startsAt)} · {b.hours} hr · {b.venueType} ({b.venueName})</div>
               <div className="meta">Total {rs(b.total)}</div>
-              {b.disputed ? <div className="note">You reported a problem. Yaari support is reviewing it, and the payment will not be released automatically.</div> : null}
+              {b.disputed ? <div className="note">You reported a problem. BookAFriend support is reviewing it, and the payment will not be released automatically.</div> : null}
               {b.status === 'in_progress' && !b.disputed ? <div className="meta">If you do nothing, payment is released automatically 24 hours after the meeting ends.</div> : null}
               {b.status === 'accepted' && b.checkinCode ? <div className="note">Check-in code: <b>{b.checkinCode}</b>. Tell it to {b.companionName} only when you meet.</div> : null}
             </div>

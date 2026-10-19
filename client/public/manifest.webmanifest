@@ -1,6 +1,6 @@
 {
-  "name": "Yaari",
-  "short_name": "Yaari",
+  "name": "BookAFriend",
+  "short_name": "baf",
   "description": "Verified companions for every plan",
   "start_url": "/",
   "display": "standalone",

@@ -70,7 +70,7 @@ if (require.main === module) {
     await connect();
     await getSettings();
     cron.start();
-    const server = app.listen(cfg.port, () => console.log(`Yaari running on port ${cfg.port}`));
+    const server = app.listen(cfg.port, () => console.log(`BookAFriend running on port ${cfg.port}`));
     const stop = () => server.close(() => process.exit(0));
     process.on('SIGTERM', stop); process.on('SIGINT', stop);
   })().catch((e) => { console.error('Could not start:', e.message); process.exit(1); });

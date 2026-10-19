@@ -88,7 +88,7 @@ export default function Admin() {
   if (!me || !D) {
     return (
       <>
-        <header className="bar"><div className="wrap"><b>Yaari Admin</b><span /></div></header>
+        <header className="bar"><div className="wrap"><b>BookAFriend Admin</b><span /></div></header>
         <div className="wrap" style={{ maxWidth: 420, paddingTop: 30 }}>
           <h2 className="t">Admin sign in</h2>
           <label className="lb">Email</label><input className="in" type="email" autoComplete="username" value={login.email} onChange={(e) => setLogin({ ...login, email: e.target.value })} />
@@ -271,7 +271,7 @@ export default function Admin() {
 
   return (
     <>
-      <header className="bar"><div className="wrap"><b>Yaari Admin</b><span>{me.email}</span></div></header>
+      <header className="bar"><div className="wrap"><b>BookAFriend Admin</b><span>{me.email}</span></div></header>
       <nav className="tabs" aria-label="Sections"><div className="wrap">{TABS.map((t) => <button key={t[0]} className="tab" aria-current={tab === t[0] ? 'true' : undefined} onClick={() => setTab(t[0])}>{t[1]}</button>)}</div></nav>
       <main><div className="wrap">
         <div className="acts" style={{ margin: '0 0 10px' }}><button className="btn alt" onClick={() => after('Updated.')}>Refresh data</button><button className="btn alt" onClick={() => { setToken(''); window.location.reload(); }}>Sign out</button></div>

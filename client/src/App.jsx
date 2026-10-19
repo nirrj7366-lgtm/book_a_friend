@@ -65,7 +65,7 @@ export default function App() {
 
   return (
     <>
-      <div className="top"><div className="wrap"><button className="logo" onClick={() => (!me ? setView('home') : null)} aria-label="Yaari">Yaari<span>.</span></button>{bar}</div></div>
+      <div className="top"><div className="wrap"><button className="logo" onClick={() => (!me ? setView('home') : null)} aria-label="Yaari">BookAFriend<span>.</span></button>{bar}</div></div>
       <div key={inApp ? 'app' : 'page'}>{body}</div>
       <Toasts /><Lightbox />
     </>
