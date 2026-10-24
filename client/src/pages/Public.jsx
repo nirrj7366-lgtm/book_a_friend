@@ -21,8 +21,19 @@ export function Home({ go, settings }) {
           {[['18+ only', 'Date of birth is checked at sign-up and again on our server.'], ['ID verification', 'Every member is reviewed by our team before they can book or be booked.'], ['Public venues only', 'Malls, cafes, cinemas and registered venues. Home visits only for verified caretakers.'], ['Strictly platonic', 'No sexual services or physical intimacy. Violations mean a permanent ban.'], ['SOS, report and block', 'Alert BookAFriend support in one tap, report anyone, or block them.'], ['Secure payments', 'Pay only through BookAFriend. Money is released after the meeting is complete.']]
             .map((x) => <div key={x[0]} className="card"><b>{x[0]}</b><span className="meta">{x[1]}</span></div>)}</div></section>
         <section className="s"><div className="earn"><h2>Earn on your own schedule</h2><ul><li>Set your own hourly rate.</li><li>You keep {keep}% of every booking.</li><li>Withdraw to UPI once your balance reaches ₹{settings.minWithdrawal}.</li></ul><button className="btn gold" onClick={() => go('signup')}>Become a companion</button></div></section>
-        <footer>BookAFriend is a marketplace for platonic companionship. Members are independent and are not employees of BookAFriend. In an emergency call 112.<br />
-          <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/refund.html">Refunds</a> · <a href="/contact.html">Contact</a></footer>
+        
+        <footer>
+          BookAFriend is a marketplace for platonic companionship. Members are
+          independent and are not employees of BookAFriend. In an emergency call 112.
+          <br />
+          <a href="/about.html">About Us</a> ·{" "}
+          <a href="/safety.html">Safety Guidelines</a> ·{" "}
+          <a href="/terms.html">Terms</a> ·{" "}
+          <a href="/privacy.html">Privacy</a> ·{" "}
+          <a href="/refund.html">Refunds</a> ·{" "}
+          <a href="/contact.html">Contact</a>
+        </footer>
+
       </div>
     </>
   );
