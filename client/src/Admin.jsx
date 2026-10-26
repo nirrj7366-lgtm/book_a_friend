@@ -216,10 +216,35 @@ export default function Admin() {
     <>
       <h2 className="t">Settings</h2>
       <div className="card"><b>Your business rules</b>
-        {[['Platform commission on companion earnings (%)', 'commissionPct'], ['Safety and service fee added for renters (%)', 'feePct'], ['Minimum withdrawal (₹)', 'minWithdrawal']].map((r) => (
-          <div key={r[1]} className="fld"><label>{r[0]}</label><input className="in" type="number" min="0" value={setf[r[1]]} onChange={(e) => setSetf({ ...setf, [r[1]]: e.target.value })} /></div>
-        ))}
-        <p className="meta">New values apply to <b>new</b> bookings only.</p>
+       
+{[
+  ['Platform commission on companion earnings (%)', 'commissionPct', 0, 60],
+  ['Safety and service fee added for renters (%)', 'feePct', 0, 30],
+  ['Minimum withdrawal (₹)', 'minWithdrawal', 100, 100000],
+  ['Minimum companion hourly rate (₹)', 'minHourlyRate', 1, 100000],
+  ['Maximum companion hourly rate (₹)', 'maxHourlyRate', 1, 100000],
+].map((r) => (
+  <div key={r[1]} className="fld">
+    <label>{r[0]}</label>
+    <input
+      className="in"
+      type="number"
+      min={r[2]}
+      max={r[3]}
+      step="1"
+      value={setf[r[1]] ?? ''}
+      onChange={(e) =>
+        setSetf({ ...setf, [r[1]]: e.target.value })
+      }
+    />
+  </div>
+))}
+
+       <p className="meta">
+          Hourly-rate limits apply whenever a companion creates or updates
+          their profile. Existing profiles outside the new limits must update
+          their rate before they can save further profile changes.
+        </p>
         <button className="btn" disabled={busy} onClick={() => run(async () => { await api('/admin/settings', { method: 'PUT', body: setf }); await load(); toast('Saved.'); })}>Save settings</button>
       </div>
       <div className="card"><b>Recent admin activity</b>

@@ -41,7 +41,7 @@ app.use('/api/safety', require('./routes/safety'));
 app.use('/api/admin', require('./routes/admin'));
 app.get('/api/settings', ah(async (req, res) => {
   const s = await getSettings();
-  res.json({ commissionPct: s.commissionPct, feePct: s.feePct, minWithdrawal: s.minWithdrawal });
+  res.json({ commissionPct: s.commissionPct, feePct: s.feePct, minWithdrawal: s.minWithdrawal, minHourlyRate: s.minHourlyRate, maxHourlyRate: s.maxHourlyRate, });
 }));
 // Health check routes for Render and UptimeRobot
 app.get(['/health', '/api/health'], (req, res) => {

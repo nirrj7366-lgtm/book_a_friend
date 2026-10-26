@@ -70,7 +70,7 @@ export const Role = ({ me, keepPct, pick }) => (
   </div>
 );
 
-export function Setup({ me, comp, commissionPct, onDone, reloadMe }) {
+export function Setup({ me, comp, commissionPct, minHourlyRate = 100,maxHourlyRate = 5000, onDone, reloadMe }) {
   const [f, setF] = useState({ services: comp ? comp.services : [], days: comp ? comp.days : [], rate: comp ? comp.rate : '', bio: comp ? comp.bio : '', c1: !!comp });
   const [photo, setPhoto] = useState(null);
   const [police, setPolice] = useState(null);
@@ -83,8 +83,16 @@ export function Setup({ me, comp, commissionPct, onDone, reloadMe }) {
     try {
       if (!f.services.length) throw new Error('Choose at least one service.');
       const r = parseInt(f.rate, 10);
-      if (!(r >= 100 && r <= 5000)) throw new Error('Set a rate between ₹100 and ₹5,000 per hour.');
-      if (!f.bio || f.bio.trim().length < 30) throw new Error('Write a short bio of at least 30 characters.');
+      if (
+        !Number.isInteger(r) ||
+        r < minHourlyRate ||
+        r > maxHourlyRate
+      ) {
+        throw new Error(
+          `Set a rate between ₹${minHourlyRate} and ₹${maxHourlyRate} per hour.`
+        );
+      }
+            if (!f.bio || f.bio.trim().length < 30) throw new Error('Write a short bio of at least 30 characters.');
       if (!f.days.length) throw new Error('Choose the days you are available.');
       if (!photo && !me.avatar) throw new Error('Please add a clear profile photo.');
       if (!f.c1) throw new Error('Please accept the safety rule.');
@@ -108,7 +116,21 @@ export function Setup({ me, comp, commissionPct, onDone, reloadMe }) {
       <input className="in" type="file" accept="image/jpeg,image/png,image/webp" style={{ marginTop: 8 }} onChange={(e) => setPhoto(e.target.files[0] || null)} /><p className="hint">A clear, friendly photo of your face. Only verified members can see it.</p>
       <span className="lbl">Services you offer</span>
       <div className="chips">{SERVICES.map((s) => <button key={s.k} className="chip" aria-pressed={f.services.includes(s.k)} onClick={() => toggle('services', s.k)}>{s.e} {s.k}</button>)}</div>
-      <label className="lbl">Your rate per hour (₹)</label><input className="in" type="number" min="100" max="5000" inputMode="numeric" value={f.rate} onChange={(e) => setF({ ...f, rate: e.target.value })} /><p className="hint">Between ₹100 and ₹5,000. BookAFriend keeps {commissionPct}% commission.</p>
+      <label className="lbl">Your rate per hour (₹)</label>
+        <input
+          className="in"
+          type="number"
+          min={minHourlyRate}
+          max={maxHourlyRate}
+          step="1"
+          inputMode="numeric"
+          value={f.rate}
+          onChange={(e) => setF({ ...f, rate: e.target.value })}
+        />
+        <p className="hint">
+          Set a rate between ₹{minHourlyRate} and ₹{maxHourlyRate} per hour.
+          BookAFriend keeps {commissionPct}% commission.
+        </p>
       <label className="lbl">Short bio</label><textarea className="in" rows={4} maxLength={280} placeholder="Tell renters about yourself in a few friendly lines." value={f.bio} onChange={(e) => setF({ ...f, bio: e.target.value })} />
       <span className="lbl">Available on</span>
       <div className="chips">{['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => <button key={d} className="chip" aria-pressed={f.days.includes(d)} onClick={() => toggle('days', d)}>{d}</button>)}</div>

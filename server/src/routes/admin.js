@@ -50,7 +50,13 @@ router.get('/data', ah(async (req, res) => {
   ]);
   res.json({
     users, companions: comps, bookings, payments, withdrawals, alerts, pings, audit,
-    settings: { commissionPct: settings.commissionPct, feePct: settings.feePct, minWithdrawal: settings.minWithdrawal },
+    settings: {
+  commissionPct: settings.commissionPct,
+  feePct: settings.feePct,
+  minWithdrawal: settings.minWithdrawal,
+  minHourlyRate: settings.minHourlyRate,
+  maxHourlyRate: settings.maxHourlyRate,
+},
   });
 }));
 
@@ -106,10 +112,57 @@ router.post('/alerts/:id/resolve', ah(async (req, res) => {
 
 router.put('/settings', ah(async (req, res) => {
   const b = req.body || {};
-  const c = Number(b.commissionPct), f = Number(b.feePct), m = Number(b.minWithdrawal);
-  if (!(c >= 0 && c <= 60) || !(f >= 0 && f <= 30) || !(m >= 100) || !Number.isFinite(m)) bad('Check the numbers: commission 0-60, fee 0-30, minimum withdrawal 100 or more.');
-  await Settings.updateOne({ key: 'main' }, { $set: { commissionPct: c, feePct: f, minWithdrawal: Math.round(m) } }, { upsert: true });
-  await log(req, 'settings_changed', `commission=${c},fee=${f},min=${m}`);
+
+  const c = Number(b.commissionPct);
+  const f = Number(b.feePct);
+  const m = Number(b.minWithdrawal);
+  const minRate = Number(b.minHourlyRate);
+  const maxRate = Number(b.maxHourlyRate);
+
+  if (!Number.isFinite(c) || c < 0 || c > 60) {
+    bad('Commission must be between 0 and 60%.');
+  }
+
+  if (!Number.isFinite(f) || f < 0 || f > 30) {
+    bad('Service fee must be between 0 and 30%.');
+  }
+
+  if (!Number.isFinite(m) || m < 100 || m > 100000) {
+    bad('Minimum withdrawal must be between ₹100 and ₹100,000.');
+  }
+
+  if (!Number.isInteger(minRate) || minRate < 1 || minRate > 100000) {
+    bad('Minimum hourly rate must be a whole amount between ₹1 and ₹100,000.');
+  }
+
+  if (!Number.isInteger(maxRate) || maxRate < 1 || maxRate > 100000) {
+    bad('Maximum hourly rate must be a whole amount between ₹1 and ₹100,000.');
+  }
+
+  if (minRate > maxRate) {
+    bad('Minimum hourly rate cannot exceed maximum hourly rate.');
+  }
+
+  await Settings.updateOne(
+    { key: 'main' },
+    {
+      $set: {
+        commissionPct: c,
+        feePct: f,
+        minWithdrawal: Math.round(m),
+        minHourlyRate: minRate,
+        maxHourlyRate: maxRate,
+      },
+    },
+    { upsert: true }
+  );
+
+  await log(
+    req,
+    'settings_changed',
+    `commission=${c},fee=${f},minWithdrawal=${m},minHourlyRate=${minRate},maxHourlyRate=${maxRate}`
+  );
+
   res.json({ ok: true });
 }));
 

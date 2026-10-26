@@ -4,9 +4,40 @@ const logic = require('./logic');
 
 async function getSettings() {
   let s = await Settings.findOne({ key: 'main' });
+
   if (!s) {
-    try { s = await Settings.create({ key: 'main' }); } catch (e) { if (e.code === 11000) s = await Settings.findOne({ key: 'main' }); else throw e; }
+    try {
+      s = await Settings.create({ key: 'main' });
+    } catch (e) {
+      if (e.code === 11000) {
+        s = await Settings.findOne({ key: 'main' });
+      } else {
+        throw e;
+      }
+    }
   }
+
+  const defaults = {
+    commissionPct: 15,
+    feePct: 5,
+    minWithdrawal: 500,
+    minHourlyRate: 100,
+    maxHourlyRate: 5000,
+  };
+
+  let changed = false;
+
+  for (const [key, value] of Object.entries(defaults)) {
+    if (s[key] == null) {
+      s[key] = value;
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    await s.save();
+  }
+
   return s;
 }
 

@@ -55,7 +55,7 @@ export default function App() {
   else if (me.status === 'pending') { body = <Wait me={me} onCheck={reloadMe} />; bar = <button className="btn alt sm" onClick={logout}>Log out</button>; }
   else if (me.status === 'suspended') { body = <Blocked />; bar = <button className="btn alt sm" onClick={logout}>Log out</button>; }
   else if (!mode) { body = <Role me={me} keepPct={Math.round(100 - settings.commissionPct)} pick={setMode} />; bar = <button className="btn alt sm" onClick={logout}>Log out</button>; }
-  else if (mode === 'earn' && (!comp || editing)) { body = <Setup me={me} comp={comp} commissionPct={settings.commissionPct} reloadMe={reloadMe} onDone={() => setEditing(false)} />; bar = <button className="btn alt sm" onClick={logout}>Log out</button>; }
+  else if (mode === 'earn' && (!comp || editing)) { body = <Setup me={me} comp={comp} commissionPct={settings.commissionPct}  minHourlyRate={settings.minHourlyRate} maxHourlyRate={settings.maxHourlyRate}  reloadMe={reloadMe} onDone={() => setEditing(false)} />; bar = <button className="btn alt sm" onClick={logout}>Log out</button>; }
   else {
     body = mode === 'earn'
       ? <Companion me={me} comp={comp} settings={settings} reloadMe={reloadMe} goSetup={() => setEditing(true)} />

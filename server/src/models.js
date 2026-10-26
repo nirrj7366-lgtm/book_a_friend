@@ -192,6 +192,9 @@ const Settings = model('Settings', new Schema({
   commissionPct: { type: Number, default: 15, min: 0, max: 60 },
   feePct: { type: Number, default: 5, min: 0, max: 30 },
   minWithdrawal: { type: Number, default: 500, min: 100 },
-}, T));
 
+  // Admin-controlled companion hourly-rate limits
+  minHourlyRate: { type: Number, default: 100, min: 1, max: 100000 },
+  maxHourlyRate: { type: Number, default: 5000, min: 1, max: 100000 },
+}, T));
 module.exports = { File, User, Companion, Booking, Payment, Ledger, Withdrawal, Alert, Block, Review, Message, Ping, Audit, Settings };
