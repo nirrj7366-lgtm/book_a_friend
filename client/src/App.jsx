@@ -9,7 +9,13 @@ import Companion from './pages/Companion';
 export default function App() {
   const [me, setMe] = useState(null);
   const [comp, setComp] = useState(null);
-  const [settings, setSettings] = useState({ commissionPct: 15, feePct: 5, minWithdrawal: 500 });
+  const [settings, setSettings] = useState({
+  commissionPct: 15,
+  feePct: 5,
+  minWithdrawal: 500,
+  minHourlyRate: 1,
+  maxHourlyRate: 100000,
+});
   const [booting, setBooting] = useState(true);
   const [view, setView] = useState('home');
   const [mode, setModeState] = useState(localStorage.getItem('yaari_mode') || '');

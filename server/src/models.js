@@ -48,7 +48,7 @@ const User = model('User', userSchema);
 const compSchema = new Schema({
   user: { type: ObjectId, ref: 'User', required: true, unique: true },
   services: [String],
-  rate: { type: Number, min: 100, max: 5000, required: true },
+  rate: { type: Number, min: 1, max: 10000, required: true },
   bio: String,
   days: [String],
   active: { type: Boolean, default: true },
@@ -194,7 +194,7 @@ const Settings = model('Settings', new Schema({
   minWithdrawal: { type: Number, default: 500, min: 100 },
 
   // Admin-controlled companion hourly-rate limits
-  minHourlyRate: { type: Number, default: 100, min: 1, max: 100000 },
-  maxHourlyRate: { type: Number, default: 5000, min: 1, max: 100000 },
+minHourlyRate: { type: Number, default: 1, min: 1, max: 100000 },
+maxHourlyRate: { type: Number, default: 10000, min: 1, max: 100000 },
 }, T));
 module.exports = { File, User, Companion, Booking, Payment, Ledger, Withdrawal, Alert, Block, Review, Message, Ping, Audit, Settings };

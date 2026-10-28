@@ -70,7 +70,7 @@ export const Role = ({ me, keepPct, pick }) => (
   </div>
 );
 
-export function Setup({ me, comp, commissionPct, minHourlyRate = 100,maxHourlyRate = 5000, onDone, reloadMe }) {
+export function Setup({ me, comp, commissionPct, minHourlyRate = 1,maxHourlyRate = 10000, onDone, reloadMe }) {
   const [f, setF] = useState({ services: comp ? comp.services : [], days: comp ? comp.days : [], rate: comp ? comp.rate : '', bio: comp ? comp.bio : '', c1: !!comp });
   const [photo, setPhoto] = useState(null);
   const [police, setPolice] = useState(null);

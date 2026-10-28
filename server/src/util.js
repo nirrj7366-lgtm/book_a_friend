@@ -21,8 +21,8 @@ async function getSettings() {
     commissionPct: 15,
     feePct: 5,
     minWithdrawal: 500,
-    minHourlyRate: 100,
-    maxHourlyRate: 5000,
+    minHourlyRate: 1,
+    maxHourlyRate: 10000,
   };
 
   let changed = false;
