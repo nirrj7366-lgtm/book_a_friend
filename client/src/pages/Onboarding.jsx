@@ -34,14 +34,32 @@ export function Kyc({ me, onDone }) {
   });
   return (
     <div className="narrow form"><h2>Verify your identity</h2><p className="sub">Our team reviews every profile before it goes live. This keeps everyone safe.</p>
+
+      <div className="note">
+  <b>Initial Testing Phase</b>
+  <p>
+    Government ID verification is not required for approved
+    test accounts during this phase.
+  </p>
+  <p>
+    If you are an authorized tester, upload a sample image (YOUR RECENT PHOTO)
+    clearly marked "TEST DOCUMENT - NOT A REAL ID".
+    Our admin team will review your test account.
+  </p>
+  <p>
+    Please do not upload Aadhaar, PAN, or other sensitive
+    identity documents for testing.
+  </p>
+</div>
+
       {me.status === 'rejected' ? <div className="note"><b>Your last submission was not approved.</b> {me.rejectReason || 'Please check your details and upload a clear ID photo.'}</div> : null}
       <label className="lbl">Date of birth</label><input className="in" type="date" max={isoDate(max)} min="1940-01-01" value={f.dob} onChange={set('dob')} /><p className="hint">You must be 18 or older.</p>
       <label className="lbl">Gender</label><select className="in" value={f.gender} onChange={set('gender')}><option value="">Select</option>{['Female', 'Male', 'Non-binary', 'Prefer not to say'].map((o) => <option key={o}>{o}</option>)}</select>
       <label className="lbl">State</label><select className="in" value={f.state} onChange={set('state')}><option value="">Select</option>{STATES.map((o) => <option key={o}>{o}</option>)}</select>
       <label className="lbl">City</label><input className="in" value={f.city} onChange={set('city')} />
       <label className="lbl">Government ID type</label><select className="in" value={f.idType} onChange={set('idType')}><option value="">Select</option>{['Aadhaar (masked)', 'PAN card', 'Driving licence', 'Passport', 'Voter ID'].map((o) => <option key={o}>{o}</option>)}</select>
-      <label className="lbl">Upload ID photo</label><input className="in" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" onChange={(e) => setFile(e.target.files[0] || null)} />
-      <p className="hint">Photos are shrunk automatically. Aadhaar: please mask the first 8 digits. Only our verification team can see it.</p>
+      <label className="lbl">Upload ID photo (YOUR RECENT PICTURE)</label><input className="in" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" onChange={(e) => setFile(e.target.files[0] || null)} />
+      
       <label className="lbl">Emergency contact name</label><input className="in" value={f.ecName} onChange={set('ecName')} />
       <label className="lbl">Emergency contact mobile</label><div className="pre"><div className="code">+91</div><input className="in" type="tel" inputMode="numeric" maxLength={10} value={f.ecPhone} onChange={set('ecPhone')} /></div>
       <div style={{ marginTop: 14 }}>
