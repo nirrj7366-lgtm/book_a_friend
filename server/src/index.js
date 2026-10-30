@@ -24,7 +24,11 @@ const csp = cfg.cspMode === 'off' ? false : {
     frameSrc: rz, objectSrc: ["'none'"], baseUri: ["'self'"], formAction: ["'self'", ...rz], frameAncestors: ["'self'"],
   },
 };
-app.use(helmet({ contentSecurityPolicy: csp, crossOriginEmbedderPolicy: false }));
+app.use(helmet({
+  contentSecurityPolicy: csp,
+  crossOriginEmbedderPolicy: false,
+  crossOriginOpenerPolicy: { policy: 'same-origin-allow-popups' },
+}));
 
 // Webhook needs the raw body (for the signature), so it is mounted before the JSON parser.
 app.post('/api/payments/webhook', payments.webhook, payments.webhookHandler);
